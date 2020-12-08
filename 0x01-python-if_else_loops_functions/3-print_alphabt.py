@@ -3,4 +3,4 @@ i = chr
 for i in range(ord('a'), ord('z') + 1):
     if i == 113 or i == 101:
         continue
-    print(chr(i), end='')
+    print("{}".format(chr(i)), end='')
