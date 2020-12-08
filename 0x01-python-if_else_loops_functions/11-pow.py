@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 def pow(a, b):
     result = a
     for i in range(1, b if b > 0 else -b):
