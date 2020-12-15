@@ -54,10 +54,11 @@ int is_palindrome(listint_t **head)
 	len = len_l(*head);
 	while (i < len)
 	{
-		if (get_int(*head, i) != get_int(*head, len - 1))
+		if ((*head)->n != get_int(*head, len - 1 - i))
 			return (0);
 		i++;
 		len--;
+		*head = (*head)->next;
 	}
 	return (1);
 }
