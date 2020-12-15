@@ -19,13 +19,13 @@ int len_l(listint_t *head)
 }
 
 /**
-  * get_int_at_idx - gets int at node list[idx]
+  * get_int - gets int at node list[idx]
   * @head: pointer to head node
   * @idx: index where to retrieve int
   * Return: int value at node list[idx]
   */
 
-int get_int_at_idx(listint_t *head, int idx)
+int get_int(listint_t *head, int idx)
 {
 	int res;
 
@@ -46,7 +46,7 @@ int get_int_at_idx(listint_t *head, int idx)
 
 int is_palindrome(listint_t **head)
 {
-	int len, node1, node2, i = 0;
+	int len, i = 0;
 
 	if (*head == NULL)
 		return (1);
@@ -54,9 +54,7 @@ int is_palindrome(listint_t **head)
 	len = len_l(*head);
 	while (i <= len)
 	{
-		node1 = get_int_at_idx(*head, i);
-		node2 = get_int_at_idx(*head, len - 1);
-		if (node1 != node2)
+		if (get_int(*head, i) != get_int(*head, len - 1))
 			return (0);
 		i++;
 		len--;
