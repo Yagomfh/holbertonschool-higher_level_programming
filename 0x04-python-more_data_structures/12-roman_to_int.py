@@ -7,20 +7,15 @@ def find_bigger_number(tocheck, nb, idx):
 
 
 def roman_to_int(roman_string):
-    if roman_string and isinstance(roman_string, str):
+    if roman_string and type(roman_string) is str:
         rlist = list(roman_string)
         rdi = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
         alist = []
         res = 0
         for nb in rlist:
-            i = 0
             for lt in rdi:
                 if lt == nb:
                     alist.append(rdi[lt])
-                    break
-                i += 1
-            if i == 7:
-                return None
         for nb in range(0, len(alist)):
             if find_bigger_number(alist, alist[nb], nb) is True:
                 res -= alist[nb]
