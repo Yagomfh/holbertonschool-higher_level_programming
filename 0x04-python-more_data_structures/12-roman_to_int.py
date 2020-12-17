@@ -10,14 +10,16 @@ def roman_to_int(roman_string):
     if roman_string and type(roman_string) is str:
         rlist = list(roman_string)
         rdi = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        alist = []
         res = 0
-        for i in range(len(roman_string) - 1):
-            c = roman_string[i]
-            c_next = roman_string[i + 1]
-            if rdi[c] > rdi[c_next]:
-                res -= rdi[c]
+        for nb in rlist:
+            for lt in rdi:
+                if lt == nb:
+                    alist.append(rdi[lt])
+        for nb in range(0, len(alist)):
+            if find_bigger_number(alist, alist[nb], nb) is True:
+                res -= alist[nb]
             else:
-                res += rdi[c]
-        res += rdi[roman_string[len(roman_string) - 1]]
+                res += alist[nb]
         return res
     return 0
