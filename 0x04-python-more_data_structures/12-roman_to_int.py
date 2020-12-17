@@ -13,9 +13,14 @@ def roman_to_int(roman_string):
         alist = []
         res = 0
         for nb in rlist:
+            i = 0
             for lt in rdi:
                 if lt == nb:
                     alist.append(rdi[lt])
+                    break
+                i += 1
+            if i == 7:
+                return None
         for nb in range(0, len(alist)):
             if find_bigger_number(alist, alist[nb], nb) is True:
                 res -= alist[nb]
