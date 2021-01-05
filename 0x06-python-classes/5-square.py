@@ -28,6 +28,15 @@ class Square:
         """
         return self.__size ** 2
 
+    def my_print(self):
+        size = self.__size
+        for x in range(size):
+            for y in range(size):
+                print("#", end='')
+            print("")
+        if size == 0:
+            print("")
+
     @property
     def size(self):
         """Get/set the current size of the square."""
