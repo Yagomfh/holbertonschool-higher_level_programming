@@ -20,8 +20,8 @@ class Square:
             raise TypeError('size must be an integer')
         if size < 0:
             raise ValueError('size must be >= 0')
-        self.__size = size
-        self.__position = position
+        self.size = size
+        self.position = position
 
     def area(self):
         """Calculates the area of a square.
@@ -61,13 +61,19 @@ class Square:
     @property
     def position(self):
         """Get/set the current position of the square."""
-        return slef.__size
+        return self.__position
 
     @position.setter
-    def position(self, value):
-        if isinstance(value, tuple) and len(value) == 2:
-            if isinstance(value[0], int) and value[0] >= 0:
-                if isinstance(value[1], int) and value[1] >= 0:
-                    self.__position = value
+    def position(self, position):
+        iscorrect = 0
+        if isinstance(position, tuple):
+            if len(position) == 2:
+                if isinstance(position[0], int):
+                    if isinstance(position[1], int):
+                        if position[0] >= 0 and position[1] >= 0:
+                            iscorrect = 1
+
+        if iscorrect:
+            self.__position = position
         else:
-            raise TypeError('position must be a tuple of 2 positive integers')
+            raise TypeError("position must be a tuple of 2 positive integers")
