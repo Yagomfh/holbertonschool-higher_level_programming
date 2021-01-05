@@ -7,11 +7,9 @@ class Square:
 
     def __init__(self, size=0, position=(0, 0)):
         """Initialize a new Square.
-
         Args:
             size (int): The size of the new square.
             position (tuple): The position of the new square.
-
         Raises:
             TypeError: if size is not an int
             ValueError: if size is < 0
@@ -25,7 +23,6 @@ class Square:
 
     def area(self):
         """Calculates the area of a square.
-
         Returns: the size raise to the power of two
         """
         return self.__size ** 2
@@ -34,16 +31,17 @@ class Square:
         """Prints the square."""
         size = self.__size
         pos = self.__position
-        for a in range(pos[1]):
-            print("")
-        for x in range(size):
-            for b in range(pos[0]):
-                print(" ", end='')
-            for y in range(size):
-                print("#", end='')
-            print("")
         if size == 0:
-            print("")
+            print()
+        else:
+            for a in range(pos[1]):
+                print("")
+            for x in range(size):
+                for b in range(pos[0]):
+                    print(" ", end='')
+                for y in range(size):
+                    print("#", end='')
+                print("")
 
     @property
     def size(self):
@@ -64,16 +62,13 @@ class Square:
         return self.__position
 
     @position.setter
-    def position(self, position):
-        iscorrect = 0
-        if isinstance(position, tuple):
-            if len(position) == 2:
-                if isinstance(position[0], int):
-                    if isinstance(position[1], int):
-                        if position[0] >= 0 and position[1] >= 0:
-                            iscorrect = 1
-
-        if iscorrect:
-            self.__position = position
+    def position(self, value):
+        ok = 0
+        if isinstance(value, tuple) and len(value) == 2:
+            if isinstance(value[0], int) and isinstance(value[1], int):
+                if value[0] >= 0 and value[1] >= 0:
+                    ok = 1
+        if ok == 1:
+            self.__position = value
         else:
             raise TypeError("position must be a tuple of 2 positive integers")
