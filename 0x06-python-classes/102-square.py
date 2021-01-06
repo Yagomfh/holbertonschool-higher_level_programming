@@ -21,6 +21,11 @@ class Square:
             raise ValueError('size must be >= 0')
         self.size = size
     def __new__(self, size):
+    """Return size of square.
+
+    Args:
+        size (int): Size of square
+    """
         return size
     def area(self):
         """Calculates the area of a square.
