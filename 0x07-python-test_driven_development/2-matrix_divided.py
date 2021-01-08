@@ -11,16 +11,19 @@ Raises:
 
 def matrix_divided(matrix, div):
     """Function that divides all elements of a matrix.
-    
+
     Args:
         matrix (list): matrix of int or float digits
         div (int/float): the dividers digit
-    
+
     Returns:
         A new matrix.
     """
-    if matrix == None or matrix == [[]] or \
-type(matrix) != list or type(matrix[0]) != list:
+    if matrix is None or matrix == [[]]:
+        raise TypeError('matrix must be a matrix \
+(list of lists) of integers/floats')
+
+    if type(matrix) != list or type(matrix[0]) != list:
         raise TypeError('matrix must be a matrix \
 (list of lists) of integers/floats')
 

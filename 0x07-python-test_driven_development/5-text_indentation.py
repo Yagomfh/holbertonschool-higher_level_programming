@@ -1,14 +1,15 @@
 #!/usr/bin/python3
-"""Module that prints a text with 2 new lines 
+"""Module that prints a text with 2 new lines
 after each of these characters: ., ? and :
 
 Raises:
     TypeError: if text is not a string
 """
 
+
 def text_indentation(text):
     """Function that prints a text with 2 new lines after each of these
-    
+
     args:
         test (str): string to be parsed
     """

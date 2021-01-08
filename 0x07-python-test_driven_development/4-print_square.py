@@ -2,7 +2,7 @@
 """Module that prints a square with the character #
 
 Raises:
-    TypeError: if size not an int or size < 0 
+    TypeError: if size not an int or size < 0
     and size is float and < 0
 """
 
