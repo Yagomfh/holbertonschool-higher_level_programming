@@ -1,0 +1,59 @@
+>>> mm = __import__('100-matrix_mul').matrix_mul
+
+>>> mm(12, [[1, 2]])
+Traceback (most recent call last):
+TypeError: m_a must be a list
+
+>>> mm([[1, 2]], 12)
+Traceback (most recent call last):
+TypeError: m_b must be a list
+
+>>> mm([1, 2], [[1, 2]])
+Traceback (most recent call last):
+TypeError: m_a must be a list of lists
+
+>>> mm([[1, 2]], [1, 2])
+Traceback (most recent call last):
+TypeError: m_b must be a list of lists
+
+>>> mm([], [[1, 2]])
+Traceback (most recent call last):
+TypeError: m_a must be a list of lists
+
+>>> mm([[]], [[1, 2]])
+Traceback (most recent call last):
+TypeError: m_a can't be empty
+
+>>> mm([[1, 2]], [])
+Traceback (most recent call last):
+TypeError: m_b must be a list of lists
+
+>>> mm([[1, 2]], [[]])
+Traceback (most recent call last):
+TypeError: m_b can't be empty
+
+>>> mm([['a', 1]], [[1, 2]])
+Traceback (most recent call last):
+TypeError: m_a should contain only integers or floats
+
+>>> mm([[1, 2]], [['a', 1]])
+Traceback (most recent call last):
+TypeError: m_b should contain only integers or floats
+
+>>> mm([[1, 2, 3], [1, 2]], [[1, 2, 3]])
+Traceback (most recent call last):
+TypeError: each row of m_a must be of the same size
+
+>>> mm([[1, 2]], [[1, 2, 3], [1, 2]])
+Traceback (most recent call last):
+TypeError: each row of m_b must be of the same size
+
+>>> mm([[1, float('inf')]], [[1, 2]])
+Traceback (most recent call last):
+ValueError: m_a and m_b can't be multiplied
+
+>>> mm([[1, 2], [3, 4]], [[1, 2], [3, 4]])
+[[7, 10], [15, 22]]
+
+>>> mm([[1, 2]], [[3, 4], [5, 6]])
+[[13, 16]]

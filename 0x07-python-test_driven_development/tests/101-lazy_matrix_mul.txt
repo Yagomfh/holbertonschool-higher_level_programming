@@ -1,0 +1,56 @@
+>>> mm = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+>>> mm(12, [[1, 2]])
+array([[12, 24]])
+
+>>> mm([[1, 2]], 12)
+array([[12, 24]])
+
+>>> mm([1, 2], [[1, 2]])
+Traceback (most recent call last):
+ValueError: objects are not aligned
+
+>>> mm([[1, 2]], [1, 2])
+array([5])
+
+>>> mm([], [[1, 2]])
+Traceback (most recent call last):
+ValueError: objects are not aligned
+
+>>> mm([[]], [[1, 2]])
+Traceback (most recent call last):
+ValueError: objects are not aligned
+
+>>> mm([[1, 2]], [])
+Traceback (most recent call last):
+ValueError: objects are not aligned
+
+>>> mm([[1, 2]], [[]])
+Traceback (most recent call last):
+ValueError: objects are not aligned
+
+>>> mm([['a', 1]], [[1, 2]])
+Traceback (most recent call last):
+ValueError: objects are not aligned
+
+>>> mm([[1, 2]], [['a', 1]])
+Traceback (most recent call last):
+ValueError: objects are not aligned
+
+>>> mm([[1, 2, 3], [1, 2]], [[1, 2, 3]])
+Traceback (most recent call last):
+ValueError: setting an array element with a sequence.
+
+>>> mm([[1, 2]], [[1, 2, 3], [1, 2]])
+Traceback (most recent call last):
+ValueError: setting an array element with a sequence.
+
+>>> mm([[1, float('inf')]], [[1, 2]])
+Traceback (most recent call last):
+ValueError: matrices are not aligned
+
+>>> mm([[1, 2], [3, 4]], [[1, 2], [3, 4]])
+array([[ 7, 10],
+       [15, 22]])
+>>> mm([[1, 2]], [[3, 4], [5, 6]])
+array([[13, 16]])
