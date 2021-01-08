@@ -2,7 +2,7 @@
 """Module that multiplies 2 matrices.
 
 Raises:
-    TypeError: m_a m_b not a list or list of list or empty or not a rectangle 
+    TypeError: m_a m_b not a list or list of list or empty or not a rectangle
     ValueError: if m_a or m_b can't be multiplied
 """
 
@@ -23,12 +23,13 @@ def check_rect(matrix):
         len_last == len(matrix[rows])
     return True
 
+
 def check_int_float(matrix):
     """Function that check is matrix has elements that are not int or float
 
     Args:
         matrix: the matrix to check
-    
+
     Returns:
         True if elems are int or float or False otherwise
     """
@@ -36,6 +37,7 @@ def check_int_float(matrix):
         if all(isinstance(y, (int, float)) for y in x) is False:
             return False
     return True
+
 
 def matrix_mul(m_a, m_b):
     """Function that multiplies 2 matrices.
@@ -66,11 +68,11 @@ def matrix_mul(m_a, m_b):
         raise TypeError('each row of m_b must be of the same size')
     try:
         res = []
-        for i in range(0,len(m_a)):
-            temp=[]
-            for j in range(0,len(m_b[0])):
+        for i in range(0, len(m_a)):
+            temp = []
+            for j in range(0, len(m_b[0])):
                 s = 0
-                for k in range(0,len(m_a[0])):
+                for k in range(0, len(m_a[0])):
                     s += m_a[i][k]*m_b[k][j]
                 temp.append(s)
             res.append(temp)
