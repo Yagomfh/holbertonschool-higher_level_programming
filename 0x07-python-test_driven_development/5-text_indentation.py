@@ -7,6 +7,11 @@ Raises:
 """
 
 def text_indentation(text):
+    """Function that prints a text with 2 new lines after each of these
+    
+    args:
+        test (str): string to be parsed
+    """
     if type(text) != str:
         raise TypeError('text must be a string')
     tmp = ""
