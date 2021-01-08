@@ -1,0 +1,14 @@
+>>> ti = __import__('5-text_indentation').text_indentation
+
+>>> ti("Hello.         World")
+Hello.
+<BLANKLINE>
+World
+>>> ti("               Hello world.")
+Hello world.
+<BLANKLINE>
+>>> ti("Hello world                 ")
+Hello world
+>>> ti(12345)
+Traceback (most recent call last):
+TypeError: text must be a string
