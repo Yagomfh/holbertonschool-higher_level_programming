@@ -20,6 +20,8 @@ class Rectangle():
 
         Returns: a string
         """
+        if self.__width == 0 or self.__height == 0:
+            return ""
         res = ""
         for y in range(self.height):
             for x in range(self.width):
@@ -28,26 +30,15 @@ class Rectangle():
                 res += '\n'
         return res
 
-    def __repr__(self):
-        """Output for developer: info about the class and its storage in mem
-
-        Returns: a string
-        """
-        return '<%s.%s object at %s>' % (
-            self.__class__.__module__,
-            self.__class__.__name__,
-            hex(id(self))
-        )
-
     def area(self):
         """Function that returns the area of the rectangle"""
-        return self.width * self.height
+        return self.__width * self.__height
 
     def perimeter(self):
         """Function that returns the perimeter of a rectangle"""
-        if self.width == 0 or self.height == 0:
+        if self.__width == 0 or self.__height == 0:
             return 0
-        return (self.width * 2) + (self.height * 2)
+        return (self.__width * 2) + (self.__height * 2)
 
     @property
     def width(self):
