@@ -49,7 +49,7 @@ class Rectangle():
         if self.width == 0 or self.height == 0:
             return 0
         return (self.width * 2) + (self.height * 2)
-    
+
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
         """Static method function that returns
@@ -72,7 +72,7 @@ class Rectangle():
             return rect_2
         else:
             return rect_1
-    
+
     @classmethod
     def square(cls, size=0):
         """Class metod that returns a square"""
