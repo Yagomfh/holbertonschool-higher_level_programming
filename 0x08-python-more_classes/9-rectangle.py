@@ -75,6 +75,7 @@ class Rectangle():
     
     @classmethod
     def square(cls, size=0):
+        """Class metod that returns a square"""
         return cls(size, size)
 
     @property
