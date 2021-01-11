@@ -2,7 +2,7 @@
 """This module defines a rectangle"""
 
 
-class Rectangle():
+class Rectangle:
     """This class defines a empty rectangle
     """
     def __init__(self, width=0, height=0):
@@ -18,7 +18,7 @@ class Rectangle():
     @properity
     def width(self):
         """Gets/sets width of the rectangle"""
-        return self.i__width
+        return self.__width
 
     @width.setter
     def width(self, value):
