@@ -65,6 +65,9 @@ TypeError: unorderable types: str() < list()
 >>> MyList([-1, -3, -4, -2, -5]).print_sorted()
 [-5, -4, -3, -2, -1]
 
+>>> MyList([1.1, 4.4, 2.1, 3.7, 5.1]).print_sorted()
+[1.1, 2.1, 3.7, 4.4, 5.1]
+
 >>> MyList([1]).print_sorted()
 [1]
 
