@@ -34,19 +34,19 @@ TypeError: <name> must be an integer
 
 >>> bg.integer_validator("name", -2.14)
 Traceback (most recent call last):
-TypeError: name must be an integer
+TypeError: <name> must be an integer
 
 >>> bg.integer_validator("name", None)
 Traceback (most recent call last):
-TypeError: name must be an integer
+TypeError: <name> must be an integer
 
 >>> bg.integer_validator("name", True)
 Traceback (most recent call last):
-TypeError: name must be an integer
+TypeError: <name> must be an integer
 
 >>> bg.integer_validator("name", 0)
 Traceback (most recent call last):
-ValueError: name must be greater than 0
+ValueError: <name> must be greater than 0
 
 >>> bg.integer_validator()
 Traceback (most recent call last):
@@ -88,4 +88,4 @@ TypeError: integer_validator() missing 1 required positional argument: 'value'
 
 >>> bg.integer_validator("name", add)
 Traceback (most recent call last):
-TypeError: name must be an integer
+NameError: name 'add' is not defined
