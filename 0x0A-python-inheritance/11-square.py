@@ -39,6 +39,7 @@ class Square(Rectangle):
     '''Sub-class (of Rectangle) Square'''
     def __init__(self, size):
         '''Init method'''
+        BaseGeometry.integer_validator(self, "size", size)
         self.__size = size
 
     def __str__(self):
