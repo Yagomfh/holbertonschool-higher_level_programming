@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-'''Module class MyList that inherits from list'''
+"""
+MyList class and print sorted function
+"""
 
 
 class MyList(list):
-    '''A class MyList that inherits from list'''
+    """ Simple list Class"""
 
     def print_sorted(self):
-        '''Public instance method that prints the list
-        but sorted (ascending sort)'''
-        Sorted = self[:]
-        Sorted.sort()
-        print(Sorted)
+        """ Print the list in sorted order"""
+        print(sorted(self))
