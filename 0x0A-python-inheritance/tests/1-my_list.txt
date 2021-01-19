@@ -1,0 +1,55 @@
+>>> MyList = __import__('1-my_list').MyList
+
+>>> my_list = MyList()
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> my_list.append(3)
+>>> my_list.append(5)
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+>>> my_list2 = my_list.copy()
+>>> print(my_list2)
+[1, 4, 2, 3, 5]
+
+>>> print(my_list.count(5))
+1
+
+>>> my_list.append("hello")
+>>> print(my_list)
+[1, 4, 2, 3, 5, 'hello']
+
+>>> my_list.extend(my_list2)
+>>> print(my_list)
+[1, 4, 2, 3, 5, 'hello', 1, 4, 2, 3, 5]
+
+>>> my_list.pop(5)
+'hello'
+>>> print(my_list)
+[1, 4, 2, 3, 5, 1, 4, 2, 3, 5]
+
+>>> my_list.sort()
+>>> print(my_list)
+[1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
+
+>>> my_list.reverse()
+>>> print(my_list)
+[5, 5, 4, 4, 3, 3, 2, 2, 1, 1]
+
+>>> my_list.clear()
+>>> print(my_list)
+[]
+
+>>> my_list.append([1, 2])
+>>> my_list.append("hello world")
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> my_list.print_sorted()
