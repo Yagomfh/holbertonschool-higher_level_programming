@@ -16,7 +16,7 @@ def print_summary():
     sorted_status = sorted(status_c)
     print("File size: {}".format(f_size))
     for elem in sorted_status:
-        if sorted_status[elem] != 0:
+        if status_c[elem] != 0:
             print("{}: {}".format(elem, status_c[elem]))
 
 
