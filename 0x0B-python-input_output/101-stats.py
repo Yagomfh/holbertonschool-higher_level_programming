@@ -16,7 +16,8 @@ def print_summary():
     sorted_status = sorted(status_c)
     print("File size: {}".format(f_size))
     for elem in sorted_status:
-        print("{}: {}".format(elem, status_c[elem]))
+        if sorted_status[elem] != 0:
+            print("{}: {}".format(elem, status_c[elem]))
 
 
 def signal_handler(sig, frame):
