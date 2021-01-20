@@ -10,12 +10,14 @@ f_size = 0
 status_c = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0, '404': 0, '405': 0, '500': 0}
 
 def print_summary():
+    """Function prints a summary of data"""
     sorted_status = sorted(status_c)
     print("File size: {}".format(f_size))
     for elem in sorted_status:
         print("{}: {}".format(elem, status_c[elem]))
 
 def signal_handler(sig, frame):
+    """Function signal handler"""
     print_summary()
     sys.exit(0)
 
