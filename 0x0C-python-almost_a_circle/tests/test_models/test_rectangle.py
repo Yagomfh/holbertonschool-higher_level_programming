@@ -178,3 +178,104 @@ class TestRectangle(unittest.TestCase):
             with patch('sys.stdout', new=StringIO()) as fake_out:
                 rct.display()
                 self.assertEqual(fake_out.getvalue(), e)
+
+    def test_update_args(self):
+        """Test for update method with args"""
+        r1 = Rectangle(10, 10, 10, 10, 1)
+        e = "[Rectangle] (1) 10/10 - 10/10\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(89)
+        e = "[Rectangle] (89) 10/10 - 10/10\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(89, 2)
+        e = "[Rectangle] (89) 10/10 - 2/10\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(89, 2, 3)
+        e = "[Rectangle] (89) 10/10 - 2/3\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(89, 2, 3, 4)
+        e = "[Rectangle] (89) 4/10 - 2/3\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(89, 2, 3, 4, 5)
+        e = "[Rectangle] (89) 4/5 - 2/3\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(6, 5, 4, 3, 2, 1, 0)
+        e = "[Rectangle] (6) 3/2 - 5/4\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update()
+        e = "[Rectangle] (6) 3/2 - 5/4\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+
+    def test_update_method_kwargs(self):
+        r1 = Rectangle(10, 10, 10, 10, 1)
+        e = "[Rectangle] (1) 10/10 - 10/10\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(height=1)
+        e = "[Rectangle] (1) 10/10 - 10/1\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(width=1, x=2)
+        e = "[Rectangle] (1) 2/10 - 1/1\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(y=1, width=2, x=3, id=89)
+        e = "[Rectangle] (89) 3/1 - 2/1\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(x=1, height=2, y=3, width=4)
+        e = "[Rectangle] (89) 1/3 - 4/2\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+
+    def test_update_module_args_kwargs(self):
+        r1 = Rectangle(10, 10, 10, 10, 1)
+        e = "[Rectangle] (1) 10/10 - 10/10\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+        r1.update(89, 1, 2, 3, 4, width=1, x=2)
+        e = "[Rectangle] (89) 2/4 - 1/2\n"
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            print(r1)
+            self.assertEqual(fake_out.getvalue(), e)
+
+    def test_update_errors(self):
+        r1 = Rectangle(10, 10, 10, 10, 1)
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
+            r1.update(10, "2")
+        with self.assertRaisesRegex(TypeError, 'height must be an integer'):
+            r1.update(10, 2, True)
+        with self.assertRaisesRegex(ValueError, 'x must be >= 0'):
+            r1.update(10, 2, 1, -4)
+        with self.assertRaisesRegex(TypeError, 'y must be an integer'):
+            r1.update(10, 3, 4, 5, False)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            r1.update(width=0)
+        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
+            r1.update(height=-4)
+        with self.assertRaisesRegex(TypeError, 'x must be an integer'):
+            r1.update(x=True)
+        with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
+            r1.update(y=-10)
