@@ -13,13 +13,19 @@ class Rectangle(Base):
         self.y = y
         super().__init__(id)
 
+    def __str__(self):
+        """__str__ method"""
+        return "[Rectangle] ({}) {}/{} \
+- {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+
     def area(self):
         """Function that return the area of a rectangle"""
         return self.width * self.height
 
     def display(self):
+        print('\n' * self.y, end='')
         for rows in range(self.height):
-            print("{}".format('#' * self.width))
+            print("{}".format((' ' * self.x) + ('#' * self.width)))
 
     @property
     def width(self):

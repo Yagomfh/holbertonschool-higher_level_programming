@@ -40,6 +40,7 @@ class TestRectangle(unittest.TestCase):
         self.r2 = Rectangle(2, 10, 6)
         self.r3 = Rectangle(8, 4, 6, 8)
         self.r4 = Rectangle(2, 15, 6, 8, 10)
+        self.tests = [self.r1, self.r2, self.r3, self.r4]
 
     def test_id(self):
         """Test for id"""
@@ -147,36 +148,33 @@ class TestRectangle(unittest.TestCase):
 
     def test_area_method(self):
         """Test area method"""
-        self.assertEqual(self.r1.area(), 8)
-        self.assertEqual(self.r2.area(), 20)
-        self.assertEqual(self.r3.area(), 32)
-        self.assertEqual(self.r4.area(), 30)
+        for rct in self.tests:
+            self.assertEqual(rct.area(), rct.width * rct.height)
 
     def test_area_with_args(self):
         """Test area method errors"""
         with self.assertRaises(Exception):
             self.r1.area(1)
 
-    def test_display_method(self):
-        """Tests display module"""
-        expected = ('#' * self.r1.width + '\n') * self.r1.height
-        with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.r1.display()
-            self.assertEqual(fake_out.getvalue(), expected)
-        expected = ('#' * self.r2.width + '\n') * self.r2.height
-        with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.r2.display()
-            self.assertEqual(fake_out.getvalue(), expected)
-        expected = ('#' * self.r3.width + '\n') * self.r3.height
-        with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.r3.display()
-            self.assertEqual(fake_out.getvalue(), expected)
-        expected = ('#' * self.r4.width + '\n') * self.r4.height
-        with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.r4.display()
-            self.assertEqual(fake_out.getvalue(), expected)
-
     def test_display_with_args(self):
         """Test display method errors"""
         with self.assertRaises(Exception):
             self.r1.display(1)
+
+    def test__str__(self):
+        """Test for __str__ method"""
+        for rct in self.tests:
+            expected = "[Rectangle] ({}) {}/{} \
+- {}/{}\n".format(rct.id, rct.x, rct.y, rct.width, rct.height)
+            with patch('sys.stdout', new=StringIO()) as fake_out:
+                print(rct)
+                self.assertEqual(fake_out.getvalue(), expected)
+
+    def test_display_with_xy(self):
+        """Test for display method v2"""
+        for rct in self.tests:
+            e = '\n' * rct.y
+            e += ((' ' * rct.x) + ('#' * rct.width + '\n')) * rct.height
+            with patch('sys.stdout', new=StringIO()) as fake_out:
+                rct.display()
+                self.assertEqual(fake_out.getvalue(), e)
