@@ -7,6 +7,7 @@ from io import StringIO
 from unittest.mock import patch
 from models.base import Base
 from models.rectangle import Rectangle
+from models.square import Square
 
 
 class TestCodingStandards(unittest.TestCase):
@@ -14,158 +15,133 @@ class TestCodingStandards(unittest.TestCase):
     @classmethod
     def setUp(cls):
         """Set up for the doc tests"""
-        cls.base_funcs = inspect.getmembers(Rectangle, inspect.isfunction)
+        cls.base_funcs = inspect.getmembers(Square, inspect.isfunction)
 
     def test_pep8_rectangle(self):
         """Test that models/base.py conforms to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/rectangle.py'])
+        result = pep8style.check_files(['models/square.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
     def test_pep8_test_rectangle(self):
         """Test that tests/test_models/test_rectangle.py conforms to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['tests/test_models/test_rectangle.py'])
+        result = pep8style.check_files(['tests/test_models/test_square.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
 
-class TestRectangle(unittest.TestCase):
+class TestSquare(unittest.TestCase):
     """Test cases for Rectangle initialization."""
     def setUp(self):
         """Test setup"""
         Base._Base__nb_objects = 0
-        self.r1 = Rectangle(2, 4)
-        self.r2 = Rectangle(2, 10, 6)
-        self.r3 = Rectangle(8, 4, 6, 8)
-        self.r4 = Rectangle(2, 15, 6, 8, 10)
-        self.tests = [self.r1, self.r2, self.r3, self.r4]
+        self.s1 = Square(2)
+        self.s2 = Square(2, 10)
+        self.s3 = Square(8, 4, 6)
+        self.s4 = Square(2, 15, 6, 8)
+        self.tests = [self.s1, self.s2, self.s3, self.s4]
 
     def test_id(self):
         """Test for id"""
-        self.assertEqual(self.r1.id, 1)
-        self.assertEqual(self.r2.id, 2)
-        self.assertEqual(self.r3.id, 3)
-        self.assertEqual(self.r4.id, 10)
+        self.assertEqual(self.s1.id, 1)
+        self.assertEqual(self.s2.id, 2)
+        self.assertEqual(self.s3.id, 3)
+        self.assertEqual(self.s4.id, 8)
 
-    def test_width(self):
-        """Test for width"""
-        self.assertEqual(self.r1.width, 2)
-        self.assertEqual(self.r2.width, 2)
-        self.assertEqual(self.r3.width, 8)
-        self.assertEqual(self.r4.width, 2)
-
-    def test_height(self):
-        """Test for height"""
-        self.assertEqual(self.r1.height, 4)
-        self.assertEqual(self.r2.height, 10)
-        self.assertEqual(self.r3.height, 4)
-        self.assertEqual(self.r4.height, 15)
+    def test_size(self):
+        """Test for size"""
+        self.assertEqual(self.s1.size, 2)
+        self.assertEqual(self.s2.size, 2)
+        self.assertEqual(self.s3.size, 8)
+        self.assertEqual(self.s4.size, 2)
 
     def test_x(self):
         """Test for x"""
-        self.assertEqual(self.r1.x, 0)
-        self.assertEqual(self.r2.x, 6)
-        self.assertEqual(self.r3.x, 6)
-        self.assertEqual(self.r4.x, 6)
+        self.assertEqual(self.s1.x, 0)
+        self.assertEqual(self.s2.x, 10)
+        self.assertEqual(self.s3.x, 4)
+        self.assertEqual(self.s4.x, 15)
 
     def test_y(self):
         """Test for y"""
-        self.assertEqual(self.r1.y, 0)
-        self.assertEqual(self.r2.y, 0)
-        self.assertEqual(self.r3.y, 8)
-        self.assertEqual(self.r4.y, 8)
+        self.assertEqual(self.s1.y, 0)
+        self.assertEqual(self.s2.y, 0)
+        self.assertEqual(self.s3.y, 6)
+        self.assertEqual(self.s4.y, 6)
 
     def test_input_errors(self):
         """Input errors"""
         with self.assertRaises(TypeError):
-            Rectangle()
-        with self.assertRaises(TypeError):
-            Rectangle(1)
+            Square()
         with self.assertRaises(Exception):
-            Rectangle(1, 2, 3, 4, 5, 6)
+            Square(1, 2, 3, 4, 5, 6)
 
-    def test_width_TypeError(self):
-        """Width TypeError"""
+    def test_size_TypeError(self):
+        """Size TypeError"""
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
-            Rectangle("Hello world!", 1)
+            Square("Hello world!")
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
-            Rectangle(True, 1)
+            Square(True)
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
-            Rectangle([1], 1)
-
-    def test_height_TypeError(self):
-        """Height TypeError"""
-        with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            Rectangle(1, "Hello world!")
-        with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            Rectangle(1, True)
-        with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            Rectangle(1, [2])
+            Square([1])
 
     def test_x_TypeError(self):
         """x TypeError"""
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Rectangle(1, 2, "Hello world!")
+            Square(1, "Hello world!")
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Rectangle(1, 2, True)
+            Square(1, True)
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Rectangle(1, 2, [3])
+            Square(1, [3])
 
     def test_y_TypeError(self):
         """y TypeError"""
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
-            Rectangle(1, 2, 3, "Hello world!")
+            Square(1, 2, "Hello world!")
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
-            Rectangle(1, 2, 3, True)
+            Square(1, 2, True)
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
-            Rectangle(1, 2, 3, [4])
+            Square(1, 2, [4])
 
     def test_width_ValueError(self):
-        """Width ValueError"""
+        """Size ValueError"""
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
-            Rectangle(0, 1)
+            Square(0)
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
-            Rectangle(-1, 1)
-
-    def test_height_ValueError(self):
-        """Height ValueError"""
-        with self.assertRaisesRegex(ValueError, "height must be > 0"):
-            Rectangle(1, 0)
-        with self.assertRaisesRegex(ValueError, "height must be > 0"):
-            Rectangle(1, -2)
+            Square(-1)
 
     def test_x_ValueError(self):
         """x ValeuError"""
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
-            Rectangle(1, 2, -1)
+            Square(1, -1)
 
     def test_y_ValueError(self):
         """y ValueError"""
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
-            Rectangle(1, 2, 3, -1)
+            Square(1, 2, -1)
 
     def test_area_method(self):
         """Test area method"""
         for rct in self.tests:
-            self.assertEqual(rct.area(), rct.width * rct.height)
+            self.assertEqual(rct.area(), rct.size * rct.size)
 
     def test_area_with_args(self):
         """Test area method errors"""
         with self.assertRaises(Exception):
-            self.r1.area(1)
+            self.s1.area(1)
 
     def test_display_with_args(self):
         """Test display method errors"""
         with self.assertRaises(Exception):
-            self.r1.display(1)
+            self.s1.display(1)
 
     def test__str__(self):
         """Test for __str__ method"""
         for rct in self.tests:
-            expected = "[Rectangle] ({}) {}/{} \
-- {}/{}\n".format(rct.id, rct.x, rct.y, rct.width, rct.height)
+            expected = "[Square] ({}) {}/{} \
+- {}\n".format(rct.id, rct.x, rct.y, rct.size, rct)
             with patch('sys.stdout', new=StringIO()) as fake_out:
                 print(rct)
                 self.assertEqual(fake_out.getvalue(), expected)
@@ -174,107 +150,107 @@ class TestRectangle(unittest.TestCase):
         """Test for display method v2"""
         for rct in self.tests:
             e = '\n' * rct.y
-            e += ((' ' * rct.x) + ('#' * rct.width + '\n')) * rct.height
+            e += ((' ' * rct.x) + ('#' * rct.size + '\n')) * rct.size
             with patch('sys.stdout', new=StringIO()) as fake_out:
                 rct.display()
                 self.assertEqual(fake_out.getvalue(), e)
 
     def test_update_args(self):
         """Test for update method with args"""
-        r1 = Rectangle(10, 10, 10, 10, 1)
-        e = "[Rectangle] (1) 10/10 - 10/10\n"
+        s1 = Square(10, 10, 10, 1)
+        e = "[Square] (1) 10/10 - 10\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            print(r1)
+            print(s1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(89)
-        e = "[Rectangle] (89) 10/10 - 10/10\n"
+        s1.update(89)
+        e = "[Square] (89) 10/10 - 10\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            print(r1)
+            print(s1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(89, 2)
-        e = "[Rectangle] (89) 10/10 - 2/10\n"
+        s1.update(89, 2)
+        e = "[Square] (89) 10/10 - 2\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            print(r1)
+            print(s1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(89, 2, 3)
-        e = "[Rectangle] (89) 10/10 - 2/3\n"
+        s1.update(89, 2, 3)
+        e = "[Square] (89) 3/10 - 2\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            print(r1)
+            print(s1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(89, 2, 3, 4)
-        e = "[Rectangle] (89) 4/10 - 2/3\n"
+        s1.update(89, 2, 3, 4)
+        e = "[Square] (89) 3/4 - 2\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            print(r1)
+            print(s1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(89, 2, 3, 4, 5)
-        e = "[Rectangle] (89) 4/5 - 2/3\n"
+        s1.update(89, 2, 3, 4, 5)
+        e = "[Square] (89) 3/4 - 2\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            print(r1)
+            print(s1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(6, 5, 4, 3, 2, 1, 0)
-        e = "[Rectangle] (6) 3/2 - 5/4\n"
+        s1.update(6, 5, 4, 3, 2, 1, 0)
+        e = "[Square] (6) 4/3 - 5\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            print(r1)
+            print(s1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update()
-        e = "[Rectangle] (6) 3/2 - 5/4\n"
+        s1.update()
+        e = "[Square] (6) 4/3 - 5\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            print(r1)
+            print(s1)
             self.assertEqual(fake_out.getvalue(), e)
 
     def test_update_method_kwargs(self):
-        r1 = Rectangle(10, 10, 10, 10, 1)
-        e = "[Rectangle] (1) 10/10 - 10/10\n"
+        r1 = Square(10, 10, 10, 1)
+        e = "[Square] (1) 10/10 - 10\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
             print(r1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(height=1)
-        e = "[Rectangle] (1) 10/10 - 10/1\n"
+        r1.update(size=1)
+        e = "[Square] (1) 10/10 - 1\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
             print(r1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(width=1, x=2)
-        e = "[Rectangle] (1) 2/10 - 1/1\n"
+        r1.update(size=1, x=2)
+        e = "[Square] (1) 2/10 - 1\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
             print(r1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(y=1, width=2, x=3, id=89)
-        e = "[Rectangle] (89) 3/1 - 2/1\n"
+        r1.update(y=1, size=2, x=3, id=89)
+        e = "[Square] (89) 3/1 - 2\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
             print(r1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(x=1, height=2, y=3, width=4)
-        e = "[Rectangle] (89) 1/3 - 4/2\n"
+        r1.update(x=1, size=2, y=3)
+        e = "[Square] (89) 1/3 - 2\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
             print(r1)
             self.assertEqual(fake_out.getvalue(), e)
 
     def test_update_module_args_kwargs(self):
-        r1 = Rectangle(10, 10, 10, 10, 1)
-        e = "[Rectangle] (1) 10/10 - 10/10\n"
+        r1 = Square(10, 10, 10, 1)
+        e = "[Square] (1) 10/10 - 10\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
             print(r1)
             self.assertEqual(fake_out.getvalue(), e)
-        r1.update(89, 1, 2, 3, 4, width=1, x=2)
-        e = "[Rectangle] (89) 3/4 - 1/2\n"
+        r1.update(89, 1, 2, 3, size=4, x=1)
+        e = "[Square] (89) 2/3 - 1\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
             print(r1)
             self.assertEqual(fake_out.getvalue(), e)
 
     def test_update_errors(self):
-        r1 = Rectangle(10, 10, 10, 10, 1)
+        r1 = Square(10, 10, 10, 1)
         with self.assertRaisesRegex(TypeError, 'width must be an integer'):
             r1.update(10, "2")
-        with self.assertRaisesRegex(TypeError, 'height must be an integer'):
-            r1.update(10, 2, True)
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
+            r1.update(10, True)
         with self.assertRaisesRegex(ValueError, 'x must be >= 0'):
-            r1.update(10, 2, 1, -4)
+            r1.update(10, 2, -4)
         with self.assertRaisesRegex(TypeError, 'y must be an integer'):
-            r1.update(10, 3, 4, 5, False)
+            r1.update(10, 3, 4, False)
         with self.assertRaisesRegex(ValueError, 'width must be > 0'):
-            r1.update(width=0)
-        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
-            r1.update(height=-4)
+            r1.update(size=0)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            r1.update(size=-4)
         with self.assertRaisesRegex(TypeError, 'x must be an integer'):
             r1.update(x=True)
         with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
