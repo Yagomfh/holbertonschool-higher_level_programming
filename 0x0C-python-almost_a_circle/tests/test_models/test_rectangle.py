@@ -223,6 +223,7 @@ class TestRectangle(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), e)
 
     def test_update_method_kwargs(self):
+        """Test update() method"""
         r1 = Rectangle(10, 10, 10, 10, 1)
         e = "[Rectangle] (1) 10/10 - 10/10\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -250,6 +251,7 @@ class TestRectangle(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), e)
 
     def test_update_module_args_kwargs(self):
+        """Test update() method"""
         r1 = Rectangle(10, 10, 10, 10, 1)
         e = "[Rectangle] (1) 10/10 - 10/10\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -262,6 +264,7 @@ class TestRectangle(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), e)
 
     def test_update_errors(self):
+        """Test update() method errors"""
         r1 = Rectangle(10, 10, 10, 10, 1)
         with self.assertRaisesRegex(TypeError, 'width must be an integer'):
             r1.update(10, "2")
@@ -279,3 +282,14 @@ class TestRectangle(unittest.TestCase):
             r1.update(x=True)
         with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
             r1.update(y=-10)
+
+    def test_to_dictionary_method(self):
+        """Tests to_dictionary method"""
+        for test in self.tests:
+            d = test.to_dictionary()
+            e = {'id': test.id, 'width': test.width, 'height': test.height,
+                 'x': test.x, 'y': test.y}
+            self.assertEqual(type(d), dict)
+            self.assertEqual(d, e)
+        with self.assertRaises(Exception):
+            d = r1.to_dictionary(1)
