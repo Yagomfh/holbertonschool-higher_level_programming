@@ -36,6 +36,12 @@ class Square(Rectangle):
                     if key == "y":
                         self.y = value
 
+    def to_dictionary(self):
+        """Method rectangle to dict"""
+        res = {'id': self.id, 'size': self.size,
+               'x': self.x, 'y': self.y}
+        return res
+
     @property
     def size(self):
         """Getter for size"""

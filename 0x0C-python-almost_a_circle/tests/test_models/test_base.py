@@ -5,6 +5,7 @@ import pep8
 import inspect
 from models.base import Base
 
+
 class TestBaseDocs(unittest.TestCase):
     """Tests to check the documentation and style of Base class"""
     @classmethod
@@ -19,6 +20,7 @@ class TestBaseDocs(unittest.TestCase):
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
+
 class TestBase(unittest.TestCase):
     """Tests for Base module"""
     def setUp(self):
@@ -27,7 +29,7 @@ class TestBase(unittest.TestCase):
         self.b2 = Base()
         self.b3 = Base(12)
         self.b4 = Base()
-    
+
     def test_id_value(self):
         self.assertEqual(self.b1.id, 1)
         self.assertEqual(self.b2.id, 2)
