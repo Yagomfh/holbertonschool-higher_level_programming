@@ -2,6 +2,8 @@
 """Module for class base"""
 import json
 import csv
+import turtle
+import random
 
 
 class Base:
@@ -19,7 +21,7 @@ class Base:
     def to_json_string(list_dictionaries):
         """Class to json string method"""
         if list_dictionaries is None:
-            list_dictionaries = []
+            return "[]"
         return json.dumps(list_dictionaries)
 
     @classmethod
@@ -93,3 +95,50 @@ class Base:
                     line[keys] = int(line[keys])
                 dicts.append(cls.create(**line))
         return dicts
+
+    def draw(list_rectangles, list_squares):
+        """Opens a window and draws all the Rectangles and Squares"""
+        zoom = 4
+        win = turtle.getscreen()
+        pen = turtle.Turtle()
+        for rct in list_rectangles:
+            R = random.random()
+            G = random.random()
+            B = random.random()
+            pen.color(R, G, B)
+            pen.penup()
+            start_x = -1 * ((rct.width * zoom) / 2)
+            start_y = (rct.height * zoom) / 2
+            pen.goto(start_x, start_y)
+            pen.pendown()
+            for x in range(4):
+                if x % 2 == 0:
+                    pen.forward(rct.width * zoom)
+                    pen.right(90)
+                else:
+                    pen.forward(rct.height * zoom)
+                    pen.right(90)
+            pen.penup()
+            pen.home()
+            pen.pendown()
+        for sqr in list_squares:
+            R = random.random()
+            G = random.random()
+            B = random.random()
+            pen.color(R, G, B)
+            pen.penup()
+            start_x = -1 * ((sqr.width * zoom) / 2)
+            start_y = (sqr.height * zoom) / 2
+            pen.goto(start_x, start_y)
+            pen.pendown()
+            for x in range(4):
+                if x % 2 == 0:
+                    pen.forward(sqr.width * zoom)
+                    pen.right(90)
+                else:
+                    pen.forward(sqr.height * zoom)
+                    pen.right(90)
+            pen.penup()
+            pen.home()
+            pen.pendown()
+        turtle.done()
