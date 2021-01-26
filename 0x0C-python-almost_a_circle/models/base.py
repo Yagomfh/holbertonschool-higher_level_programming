@@ -18,8 +18,8 @@ class Base:
 
     def to_json_string(list_dictionaries):
         """Class to json string method"""
-        if list_dictionaries is None:
-            return "[]"
+        if list_dictionaries is None or len(list_dictionaries) == 0:
+            list_dictionaries = []
         return json.dumps(list_dictionaries)
 
     @classmethod
