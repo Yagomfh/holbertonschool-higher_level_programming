@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module for class base"""
 import json
+import csv
 
 
 class Base:
@@ -17,10 +18,9 @@ class Base:
 
     def to_json_string(list_dictionaries):
         """Class to json string method"""
-        if list_dictionaries is None or len(list_dictionaries) == 0:
+        if list_dictionaries is None:
             return "[]"
-        else:
-            return json.dumps(list_dictionaries)
+        return json.dumps(list_dictionaries)
 
     @classmethod
     def save_to_file(cls, list_objs):
@@ -63,3 +63,33 @@ class Base:
         except:
             pass
         return res
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Save class to csv file method"""
+        dicts = []
+        if list_objs is not None:
+            for obj in list_objs:
+                dicts.append(obj.to_dictionary())
+        filename = cls.__name__ + ".csv"
+        with open(filename, 'w') as csv_f:
+            if cls.__name__ == "Rectangle":
+                fieldnames = ['id', 'width', 'height', 'x', 'y']
+            else:
+                fieldnames = ['id', 'size', 'x', 'y']
+            writer = csv.DictWriter(csv_f, fieldnames=fieldnames)
+            writer.writeheader()
+            for dic in dicts:
+                writer.writerow(dic)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Load instances from cvs file"""
+        filename = cls.__name__ + ".csv"
+        dicts = []
+        with open(filename, 'r') as csv_f:
+            for line in csv.DictReader(csv_f):
+                for keys in line:
+                    line[keys] = int(line[keys])
+                dicts.append(cls.create(**line))
+        return dicts
