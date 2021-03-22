@@ -3,21 +3,18 @@
 
 const args = process.argv;
 
-function max (array) {
-  let i = 3;
-  let maxInt = parseInt(array[2]);
-  let secondBig;
-
+function secondMax (arr) {
+  const array = arr.slice(2, arr.length);
+  let i = 0;
   for (; i < array.length; i++) {
-    if (parseInt(array[i]) > maxInt) {
-      secondBig = maxInt;
-      maxInt = parseInt(array[i]);
-    }
+    array[i] = parseInt(array[i]);
   }
-  return secondBig;
+  array.sort(function (a, b) { return b - a; });
+  return array[1];
 }
+
 if (args.length <= 3) {
   console.log(0);
 } else {
-  console.log(max(args));
+  console.log(secondMax(args));
 }
