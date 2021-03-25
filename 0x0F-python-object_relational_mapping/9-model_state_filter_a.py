@@ -6,7 +6,6 @@ from sqlalchemy import (create_engine)
 from sqlalchemy.orm import Session
 from sqlalchemy.engine.url import URL
 
-
 db = {'drivername': 'mysql+mysqldb',
       'host': 'localhost',
       'port': '3306',
@@ -21,7 +20,10 @@ if __name__ == "__main__":
 
     session = Session(engine)
 
-    data = session.query(State)
-
-    for state in data:
-        print("{}: {}".format(state.id, state.name))
+    try:
+        data = session.query(State).filter(State.name.like('%a%'))
+        for state in data:
+            print("{}: {}".format(state.id, state.name))
+    except:
+        print("Nothing")
+    session.close()

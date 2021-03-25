@@ -2,10 +2,10 @@
 """SQLalchemy"""
 import sys
 from model_state import Base, State
+from model_city import City
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import Session
 from sqlalchemy.engine.url import URL
-
 
 db = {'drivername': 'mysql+mysqldb',
       'host': 'localhost',
@@ -21,7 +21,6 @@ if __name__ == "__main__":
 
     session = Session(engine)
 
-    data = session.query(State)
-
-    for state in data:
-        print("{}: {}".format(state.id, state.name))
+    data = session.query(State, City).filter(State.id == City.state_id)
+    for state, city in data:
+        print("{}: ({}) {}".format(state.name, city.id, city.name))

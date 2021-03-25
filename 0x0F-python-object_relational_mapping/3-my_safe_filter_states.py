@@ -11,7 +11,8 @@ cur = db.cursor()
 
 def sql_query():
     """SQL query"""
-    states = cur.execute("SELECT * FROM states WHERE name = %s ORDER BY id", (sys.argv[4], ))
+    states = cur.execute("SELECT * FROM states\
+WHERE name = %s ORDER BY id", (sys.argv[4], ))
     result = cur.fetchall()
     for row in result:
         print(row)
