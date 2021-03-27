@@ -7,14 +7,14 @@ from sqlalchemy.orm import Session
 from relationship_city import City
 from relationship_state import Base, State
 
-db = {'drivername': 'mysql+mysqldb',
-      'host': 'localhost',
-      'port': '3306',
-      'username': sys.argv[1],
-      'password': sys.argv[2],
-      'database': sys.argv[3]}
 
 if __name__ == "__main__":
+    db = {'drivername': 'mysql+mysqldb',
+          'host': 'localhost',
+          'port': '3306',
+          'username': sys.argv[1],
+          'password': sys.argv[2],
+          'database': sys.argv[3]}
     url = URL(**db)
     engine = create_engine(url, pool_pre_ping=True)
     Base.metadata.create_all(engine)
