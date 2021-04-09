@@ -8,7 +8,8 @@ import requests
 if __name__ == "__main__":
     username = sys.argv[2]
     repo_name = sys.argv[1]
-    url = "https://api.github.com/repos/" + username + '/' + repo_name + '/commits'
+    url = "https://api.github.com/repos/" + username + '/\
+' + repo_name + '/commits'
     r = requests.get(url)
     Dict = r.json()
     new_dict = {}
