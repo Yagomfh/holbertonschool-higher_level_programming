@@ -5,20 +5,21 @@ const process = require('process');
 const request = require('request');
 const args = process.argv;
 const url = args[2];
-const options = { json: true };
-const WedgeAntilles = 'https://swapi-api.hbtn.io/api/people/18/';
+const characterId = '18';
 
-request(url, options, function (error, response, body) {
-  if (error) {
-    console.error(error);
-    return;
-  }
-  let count = 0;
-  const films = body.results;
-  for (const i in films) {
-    if (films[i].characters.includes(WedgeAntilles)) {
-      count += 1;
+request(url, function handleResponse (err, res, body) {
+  if (err) {
+    console.log(err);
+  } else {
+    let counter = 0;
+    const films = JSON.parse(body).results;
+    for (const film of films) {
+      for (const character of film.characters) {
+        if (character.includes(characterId)) {
+          counter++;
+        }
+      }
     }
+    console.log(counter);
   }
-  console.log(count);
 });
