@@ -19,7 +19,6 @@ request(url, options, function (error, response, body) {
     request(casting[i], options, function (error, response, body) {
       if (error) {
         console.error(error);
-        return;
       } else {
         console.log(body.name);
       }
