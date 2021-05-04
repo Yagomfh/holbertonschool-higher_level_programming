@@ -10,6 +10,7 @@ const options = { json: true };
 request(url, options, function (error, response, body) {
   if (error) {
     console.error(error);
+    return;
   }
   const res = {};
   const tasks = body;

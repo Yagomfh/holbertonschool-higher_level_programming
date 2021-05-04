@@ -11,6 +11,7 @@ const WedgeAntilles = 'https://swapi-api.hbtn.io/api/people/18/';
 request(url, options, function (error, response, body) {
   if (error) {
     console.error(error);
+    return;
   }
   let count = 0;
   const films = body.results;

@@ -14,5 +14,15 @@ request(url, options, function (error, response, body) {
     console.error(error);
     return;
   }
-  console.log(body.title);
+  const casting = body.characters;
+  for (const i in casting) {
+    request(casting[i], options, function (error, response, body) {
+      if (error) {
+        console.error(error);
+        return;
+      } else {
+        console.log(body.name);
+      }
+    });
+  }
 });
